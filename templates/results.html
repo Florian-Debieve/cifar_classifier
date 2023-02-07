@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Classification Results</title>
+    <style>
+        body {
+            background-color: #808080;
+            color: white;
+            font-family: Arial, sans-serif;
+            padding: 20px;
+            text-align: center;
+        }
+        h1 {
+            margin-top: 100px;
+        }
+        p {
+            font-size: 18px;
+        }
+        img {
+            margin: 20px auto;
+            display: block;
+        }
+        form {
+            margin: 20px auto;
+            width: 300px;
+        }
+        input[type="submit"] {
+            background-color: #4CAF50;
+            color: white;
+            padding: 12px 20px;
+            border: none;
+            cursor: pointer;
+            width: 100%;
+        }
+        input[type="submit"]:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <h1>Classification Results</h1>
+    <p>The image you uploaded has been classified as a {{ prediction }}</p>
+    <img src="{{url_for('static', filename='proba_plot.png')}}" alt="Probabilities for each category">
+    <form action="{{ url_for('classify_image') }}" method="GET">
+      <input type="submit" value="Upload another image">
+    </form>
+</body>
+</html>

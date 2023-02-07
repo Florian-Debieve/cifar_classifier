@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Upload an Image</title>
+    <style>
+        body {
+            background-color: #808080;
+            color: white;
+            font-family: Arial, sans-serif;
+            padding: 20px;
+        }
+        h1 {
+            margin-top: 100px;
+            text-align: center;
+        }
+        form {
+            margin: 0 auto;
+            width: 300px;
+        }
+        input[type="file"] {
+            margin-bottom: 20px;
+            width: 100%;
+        }
+        input[type="submit"] {
+            background-color: #4CAF50;
+            color: white;
+            padding: 12px 20px;
+            border: none;
+            cursor: pointer;
+            width: 100%;
+        }
+        input[type="submit"]:hover {
+            background-color: #45a049;
+        }
+        .instructions {
+            width: 300px;
+            font-size: 14px;
+        }
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin: 0 auto;
+            width: 300px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Upload an Image</h1>
+        {% if message %}
+        <p>{{ message }}</p>
+        {% endif %}
+        <form method="post" enctype="multipart/form-data">
+            <input type="file" name="image">
+            <input type="submit" value="Upload">
+        </form>
+        <div class="instructions" style="margin-top: 20px;">
+            <p>This is an application that is aimed to classified images into 10 categories:</p>
+            <ul>
+                <li>Plane</li>
+                <li>Car</li>
+                <li>Bird</li>
+                <li>Cat</li>
+                <li>Deer</li>
+                <li>Dog</li>
+                <li>Frog</li>
+                <li>Horse</li>
+                <li>Ship</li>
+                <li>Truck</li>
+            </ul>
+            <p>Please upload your image and try it.</p>
+        </div>
+    </div>
+    <div style="font-size: 12px; text-align: center;">
+        The model used in this application was trained with the CIFAR-10 dataset provided by Alex Krizhevsky.
+    </div>
+</body>
+</html>
