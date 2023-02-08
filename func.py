@@ -5,7 +5,7 @@ from PIL import Image
 from skimage.transform import resize
 
 
-def adapt_img(image_loc, model_type):
+def adapt_img(image_loc, model_type): # Reshape the uploaded image in the correct size and preprocess it depending on the model it will be fed to.
     image = Image.open(image_loc)
     image = resize(np.array(image), (32, 32, 3))
     image = np.array(image * 255, dtype='int')
@@ -17,11 +17,11 @@ def adapt_img(image_loc, model_type):
         return 'error'
 
 
-def prob(image_loc, model, model_type):
+def prob(image_loc, model, model_type): # Output the probabilities of the image being a part of each of the 10 categories of the classifier.
     return model.predict(adapt_img(image_loc, model_type))[0]
 
 
-def pred(image_loc, models):
+def pred(image_loc, models): # Output the final prediction of the classifier and a graph with the probabilities for each categories.
     models_names = list(models.keys())
     class_names = {
         0: 'plane',
@@ -44,7 +44,7 @@ def pred(image_loc, models):
     return class_pred
 
 
-def create_plot(p):
+def create_plot(p): # Create the graph with the probabilities for each categories.
     catg = ['Plane','Car','Bird','Cat','Deer','Dog','Frog','Horse','Ship','Truck']
     plt.figure(facecolor='#808080')
     plt.rcParams["text.color"] = "white"
@@ -61,7 +61,7 @@ def create_plot(p):
     return plt
 
 
-def create_vgg16():
+def create_vgg16(): # Build the first model composing the classifier with the weights and architecture files.
     with open("static/weights_vgg16/vgg16_architecture.json", "r") as f:
         model_architecture = f.read()
     model = tf.keras.models.model_from_json(model_architecture)
@@ -76,7 +76,7 @@ def create_vgg16():
     return model
 
 
-def create_eff():
+def create_eff(): # Build the second model composing the classifier with the weights and architecture files.
     with open("static/weights_eff/eff_architecture.json", "r") as f:
         model_architecture = f.read()
     model = tf.keras.models.model_from_json(model_architecture)
